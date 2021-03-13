@@ -129,32 +129,3 @@ load_p3_2(3, :) = 1*erlang3(3, :);
 xlsFile = 'trafficload_p3_2.xls';
 xlswrite(xlsFile, load_p3_2);
 
-%%% erlangB function%%%
-function load_totoal=erlangB(m,br)
-    p_up=500;
-    p_l=0.0;
-    p_mid=(p_up+p_l)/2;        
-    temp=blockrate(p_mid,m);
-    
-    while(p_up-p_l>0.0001)     
-      
-            if(temp>br)
-                p_up=p_mid;
-            else
-                p_l=p_mid;
-            end
-             p_mid=(p_up+p_l)/2;
-             temp=blockrate(p_mid,m);
-
-    end
-   load_totoal=p_mid;           
-end
-
-%%%brakerate function%%%
-% blocking rate
-function B=blockrate(p,m)       
-    B=1;                       
-    for k=1:m
-       B=((p*B)/k)/(1+p*B/k); 
-    end
-end
